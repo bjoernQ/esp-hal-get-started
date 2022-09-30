@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Create a project from the template - Getting started with esp-hal</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.</strong> Setting up a development environment</a></li><li class="chapter-item expanded "><a href="create_project.html" class="active"><strong aria-hidden="true">2.</strong> Create a project from the template</a></li><li class="chapter-item expanded "><a href="hello_world.html"><strong aria-hidden="true">3.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="panic.html"><strong aria-hidden="true">4.</strong> Panic!</a></li><li class="chapter-item expanded "><a href="blinky.html"><strong aria-hidden="true">5.</strong> Blinky</a></li><li class="chapter-item expanded "><a href="button.html"><strong aria-hidden="true">6.</strong> Detect a button press</a></li><li class="chapter-item expanded "><a href="interrupt.html"><strong aria-hidden="true">7.</strong> Detect a button press with interrupt</a></li><li class="chapter-item expanded "><a href="next.html"><strong aria-hidden="true">8.</strong> What's next?</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Getting started with esp-hal</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bjoernQ/esp-hal-getting-started" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="creating-a-project-from-the-template"><a class="header" href="#creating-a-project-from-the-template">Creating a Project from the Template</a></h1>
+<p>The easiest way to start a new project is using the <a href="https://github.com/esp-rs/esp-template">esp-template</a></p>
+<p>To generate a new project:</p>
+<pre><code class="language-shell">cargo generate https://github.com/esp-rs/esp-template
+</code></pre>
+<h2 id="inspecting-the-generated-project"><a class="header" href="#inspecting-the-generated-project">Inspecting the generated Project</a></h2>
+<p>Using the <code>esp32c3</code> target without dev-container support and without support for memory allocations this should generate a file structure like this:</p>
+<pre><code class="language-text">│   .gitignore
+│   Cargo.toml
+│   LICENSE-APACHE
+│   LICENSE-MIT
+│   rust-toolchain.toml
+│
+├───.cargo
+│       config.toml
+│
+├───.vscode
+│       settings.json
+│
+└───src
+        main.rs
+</code></pre>
+<p>Before going further lets see what these files are for.</p>
+<ul>
+<li>.gitignore
+<ul>
+<li>this tells <code>git</code> which folders and files to ignore</li>
+</ul>
+</li>
+<li>Cargo.toml
+<ul>
+<li>the usual Cargo <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">manifest</a> declaring some meta-data and dependencies of the project</li>
+</ul>
+</li>
+<li>LICENSE-APACHE, LICENSE_MIT
+<ul>
+<li>those are the most common licenses used in the Rust ecosystem</li>
+<li>if you want to apply a different license you can delete these files and change the license in <code>Cargo.toml</code></li>
+</ul>
+</li>
+<li>rust-toolchain.toml
+<ul>
+<li>defines which Rust toolchain to use</li>
+<li>depending on your target this will use <code>nightly</code> or <code>esp</code></li>
+</ul>
+</li>
+<li>.cargo/config.toml
+<ul>
+<li>the Cargo <a href="https://doc.rust-lang.org/cargo/reference/config.html">configuration</a></li>
+<li>this defines a few options to correctly build the project</li>
+<li>also contains <code>runner = &quot;espflash --monitor&quot;</code> - this means you can just use <code>cargo run</code> to flash and monitor your code</li>
+</ul>
+</li>
+<li>.vscode/settings.json
+<ul>
+<li>settings for Visual Studio Code - if you are not using VSCode you can delete the whole folder</li>
+</ul>
+</li>
+<li>src/main.rs
+<ul>
+<li>the main source file of the newly created project</li>
+<li>we will examine it's content in the next section</li>
+</ul>
+</li>
+</ul>
+<h2 id="mainrs"><a class="header" href="#mainrs"><code>main.rs</code></a></h2>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use esp32c3_hal::{clock::ClockControl, pac::Peripherals, prelude::*, timer::TimerGroup, Rtc};
+use esp_backtrace as _;
+
+#[riscv_rt::entry]
+fn main() -&gt; ! {
+    let peripherals = Peripherals::take().unwrap();
+    let system = peripherals.SYSTEM.split();
+    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+
+    // Disable the RTC and TIMG watchdog timers
+    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
+    let timer_group0 = TimerGroup::new(peripherals.TIMG0, &amp;clocks);
+    let mut wdt0 = timer_group0.wdt;
+    let timer_group1 = TimerGroup::new(peripherals.TIMG1, &amp;clocks);
+    let mut wdt1 = timer_group1.wdt;
+
+    rtc.swd.disable();
+    rtc.rwdt.disable();
+    wdt0.disable();
+    wdt1.disable();
+
+    loop {}
+}
+</code></pre>
+<p>That is quite a lot of code. Lets see what it is good for.</p>
+<ul>
+<li><code>#![no_std]</code>
+<ul>
+<li>this tells the Rust compiler that this code doesn't use <code>libstd</code></li>
+</ul>
+</li>
+<li><code>#![no_main]</code>
+<ul>
+<li>The <code>no_main</code> attribute says that this program won't use the standard main interface, which is tailored for command line applications that receive arguments. Instead of the standard main we'll use the entry attribute from the <code>riscv-rt</code> crate to define a custom entry point. In this program we have named the entry point &quot;main&quot;, but any other name could have been used. The entry point function must have the signature <code>fn() -&gt; !</code>; this type indicates that the function never returns – which means that the program never terminates.</li>
+</ul>
+</li>
+<li><code>use esp32c3_hal:{...}</code>
+<ul>
+<li>we need to bring in some types we are going to use</li>
+<li>these are from <code>esp-hal</code></li>
+</ul>
+</li>
+<li><code>use esp_backtrace as _;</code>
+<ul>
+<li>since we are in a bare-metal environment we need a panic-handler that runs if a panic occurs in code</li>
+<li>there are a few different crates you can use (e.g <code>panic-halt</code>) but <code>esp-backtrace</code> provides an implementation that prints the address of a backtrace - together with <code>espflash</code>/<code>espmonitor</code> these addresses can get decoded into source code locations</li>
+</ul>
+</li>
+<li><code>let peripherals = Peripherals::take().unwrap();</code>
+<ul>
+<li>HAL drivers usually take ownership of peripherals accessed via the PAC</li>
+<li>here we take all the peripherals from the PAC to pass them to the HAL drivers later</li>
+</ul>
+</li>
+<li><code>let system = peripherals.SYSTEM.split();</code>
+<ul>
+<li>sometimes a peripheral (here the System peripheral) are coarse grained and don't exactly fit the HAL drivers - so here we split the System peripheral into smaller pieces which get passed to the drivers</li>
+</ul>
+</li>
+<li><code>let clocks = ClockControl::boot_defaults(system.clock_control).freeze();</code>
+<ul>
+<li>here we configure the system clocks - in this case we are fine with the defaults</li>
+<li>we freeze the clocks which means we cannot change them later</li>
+<li>some drivers need a reference to the clocks to know how to calculate rates and durations</li>
+</ul>
+</li>
+<li>the next block of code instanciates some peripherals (namely Rtc and the two timer groups) to disable the watchdog which is armed after boot
+<ul>
+<li>without that code the SoC would reboot after some time</li>
+<li>there is another way to prevent the reboot: <a href="https://docs.rs/esp32c3-hal/0.2.0/esp32c3_hal/prelude/trait._embedded_hal_watchdog_Watchdog.html#tymethod.feed">feeding</a> the watchdog</li>
+</ul>
+</li>
+<li><code>loop {}</code>
+<ul>
+<li>since our function is supposed to never return we just &quot;do nothing&quot; in a loop</li>
+</ul>
+</li>
+</ul>
+<h2 id="running-the-code"><a class="header" href="#running-the-code">Running the Code</a></h2>
+<p>Building and running the code is as easy as</p>
+<pre><code class="language-shell">cargo run
+</code></pre>
+<p>This builds the code according to the configuration and executes <code>espflash</code> to flash the code to the board.</p>
+<p>Since our <code>runner</code> configuration also passes the <code>--monitor</code> argument to <code>espflash</code> we can see what the code is printing.</p>
+<p>You should see something similar to this:</p>
+<pre><code class="language-text">Connecting...
+
+Chip type:         ESP32-C3 (revision 3)
+Crystal frequency: 40MHz
+Flash size:        4MB
+Features:          WiFi
+MAC address:       60:55:f9:c0:0e:ec
+App/part. size:    198752/4128768 bytes, 4.81%
+[00:00:00] ########################################      12/12      segment 0x0
+[00:00:00] ########################################       1/1       segment 0x8000
+[00:00:01] ########################################      57/57      segment 0x10000
+Flashing has completed!
+Commands:
+    CTRL+R    Reset chip
+    CTRL+C    Exit
+
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xc (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4004c72e
+0x4004c72e - _stack_start
+    at ??:??
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd6100,len:0x172c
+load:0x403ce000,len:0x928
+0x403ce000 - _erwtext
+    at ??:??
+load:0x403d0000,len:0x2ce0
+0x403d0000 - _erwtext
+    at ??:??
+entry 0x403ce000
+0x403ce000 - _erwtext
+    at ??:??
+I (24) boot: ESP-IDF v4.4-dev-2825-gb63ec47238 2nd stage bootloader
+I (24) boot: compile time 12:10:40
+I (25) boot: chip revision: 3
+I (28) boot_comm: chip revision: 3, min. bootloader chip revision: 0
+I (35) boot.esp32c3: SPI Speed      : 80MHz
+I (39) boot.esp32c3: SPI Mode       : DIO
+I (44) boot.esp32c3: SPI Flash Size : 4MB
+I (49) boot: Enabling RNG early entropy source...
+I (54) boot: Partition Table:
+I (58) boot: ## Label            Usage          Type ST Offset   Length
+I (65) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (73) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (80) boot:  2 factory          factory app      00 00 00010000 003f0000
+I (88) boot: End of partition table
+I (92) boot_comm: chip revision: 3, min. application chip revision: 0
+I (99) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=04a6ch ( 19052) map
+I (110) esp_image: segment 1: paddr=00014a94 vaddr=40380000 size=00910h (  2320) load
+I (116) esp_image: segment 2: paddr=000153ac vaddr=00000000 size=0ac6ch ( 44140)
+I (131) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=2081ch (133148) map
+I (152) boot: Loaded app from partition at offset 0x10000
+
+</code></pre>
+<p>What you see here are messages from the first and second stage bootloader and then ... nothing.</p>
+<p>And that is exactly what the code is doing.</p>
+<p>You can reboot with <code>CTRL+R</code> or exit with <code>CTRL+C</code></p>
+<p>In the next chapter we will add some more interesting output.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="hello_world.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="hello_world.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Getting started with esp-hal</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.</strong> Setting up a development environment</a></li><li class="chapter-item expanded "><a href="create_project.html"><strong aria-hidden="true">2.</strong> Create a project from the template</a></li><li class="chapter-item expanded "><a href="hello_world.html"><strong aria-hidden="true">3.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="panic.html"><strong aria-hidden="true">4.</strong> Panic!</a></li><li class="chapter-item expanded "><a href="blinky.html"><strong aria-hidden="true">5.</strong> Blinky</a></li><li class="chapter-item expanded "><a href="button.html"><strong aria-hidden="true">6.</strong> Detect a button press</a></li><li class="chapter-item expanded "><a href="interrupt.html"><strong aria-hidden="true">7.</strong> Detect a button press with interrupt</a></li><li class="chapter-item expanded "><a href="next.html"><strong aria-hidden="true">8.</strong> What's next?</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Getting started with esp-hal</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bjoernQ/esp-hal-getting-started" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>The goal of this book is to provide a getting-started guide on using the Rust programming language with Espressif SoCs and modules using <a href="https://github.com/esp-rs/esp-hal">esp-hal</a>.</p>
+<h2 id="the-two-approaches"><a class="header" href="#the-two-approaches">The Two Approaches</a></h2>
+<p>First thing to decide when approaching Rust on Espressif SoCs is which approach you are going to use. We provide two very
+different ways to run your Rust code. (Actually there are three ways)</p>
+<ul>
+<li>Running in a hosted environment: use Rust including <a href="https://doc.rust-lang.org/std/">libstd</a> on top of <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html/">ESP-IDF</a> - this matches the approach outlined <a href="https://docs.rust-embedded.org/book/intro/no-std.html#hosted-environments">here</a></li>
+<li>Running in a bare metal environment: use Rust without <a href="https://doc.rust-lang.org/std/">libstd</a> and memory allocations are optionally supported - this matches the approach outlined <a href="https://docs.rust-embedded.org/book/intro/no-std.html#bare-metal-environments">here</a></li>
+</ul>
+<p>This book will only cover the second approach. To learn more about the first approach please follow the instructions found in <a href="https://esp-rs.github.io/book/overview/using-the-standard-library.html">The Rust on ESP book</a></p>
+<h2 id="what-is-not-covered"><a class="header" href="#what-is-not-covered">What is not covered?</a></h2>
+<p>In this book we will cover the basics using the most standard tools.</p>
+<p>For many things there are alternative ways and tools but especially in the beginning that might be confusing.</p>
+<p>Examples shown here usually apply to ESP32-C3 using the <a href="https://github.com/esp-rs/esp-rust-board">ESP32-C3-DevKit-RUST-1</a> board.</p>
+<p>You can use any other ESP32, ESP32-C3, ESP32-S2 or ESP32-S3 development board but smaller code changes and configuration changes might be needed.</p>
+<p>Also this book will only cover working locally. But there is support to use <a href="https://esp-rs.github.io/book/dependencies/installing-rust.html#using-containers">dev-containers</a> and even developing in a hosted cloud environment like GitHub Codespaces and GitPod. </p>
+<p>Additionally you can even try running code in a web browser without any actualy hardware using <a href="https://wokwi.com/rust">Wokwi</a></p>
+<h2 id="important-terminology"><a class="header" href="#important-terminology">Important Terminology</a></h2>
+<p>This book assumes you are familiar with some special terms. If you don't already know what a PAC or HAL is there is a good introduction in the <a href="https://docs.rust-embedded.org/discovery/microbit/04-meet-your-hardware/terminology.html">Discovery Book</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setting-up-a-development-environment"><a class="header" href="#setting-up-a-development-environment">Setting up a development environment</a></h1>
+<h2 id="installing-rust"><a class="header" href="#installing-rust">Installing Rust</a></h2>
+<p>Depending on which target you want to use installing Rust can be more or less involved.</p>
+<p>Please follow the instructions outlined in <a href="https://esp-rs.github.io/book/dependencies/installing-rust.html">The Rust on ESP Book</a></p>
+<h2 id="installing-tools"><a class="header" href="#installing-tools">Installing Tools</a></h2>
+<p>There are only a few tools needed to get started.</p>
+<ul>
+<li>cargo-generate (<code>cargo install cargo-generate</code>)
+<ul>
+<li>used to create a new project from a template, this is not strictly needed but creating a new project from scratch is quite some work</li>
+</ul>
+</li>
+<li>espflash (<code>cargo install espflash</code>)
+<ul>
+<li>used to flash your code via USB-serial</li>
+</ul>
+</li>
+</ul>
+<p>There are other tools which might be useful (e.g. <code>espmonitor</code>) but these two are the bare-minimum to follow the instructions in this book.</p>
+<p>It's assumed you use <a href="https://code.visualstudio.com/">Visual Studio Code</a> with the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">Rust Analyzer Extension</a> but that is not strictly needed and in theory you could use any text editor.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-project-from-the-template"><a class="header" href="#creating-a-project-from-the-template">Creating a Project from the Template</a></h1>
+<p>The easiest way to start a new project is using the <a href="https://github.com/esp-rs/esp-template">esp-template</a></p>
+<p>To generate a new project:</p>
+<pre><code class="language-shell">cargo generate https://github.com/esp-rs/esp-template
+</code></pre>
+<h2 id="inspecting-the-generated-project"><a class="header" href="#inspecting-the-generated-project">Inspecting the generated Project</a></h2>
+<p>Using the <code>esp32c3</code> target without dev-container support and without support for memory allocations this should generate a file structure like this:</p>
+<pre><code class="language-text">│   .gitignore
+│   Cargo.toml
+│   LICENSE-APACHE
+│   LICENSE-MIT
+│   rust-toolchain.toml
+│
+├───.cargo
+│       config.toml
+│
+├───.vscode
+│       settings.json
+│
+└───src
+        main.rs
+</code></pre>
+<p>Before going further lets see what these files are for.</p>
+<ul>
+<li>.gitignore
+<ul>
+<li>this tells <code>git</code> which folders and files to ignore</li>
+</ul>
+</li>
+<li>Cargo.toml
+<ul>
+<li>the usual Cargo <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">manifest</a> declaring some meta-data and dependencies of the project</li>
+</ul>
+</li>
+<li>LICENSE-APACHE, LICENSE_MIT
+<ul>
+<li>those are the most common licenses used in the Rust ecosystem</li>
+<li>if you want to apply a different license you can delete these files and change the license in <code>Cargo.toml</code></li>
+</ul>
+</li>
+<li>rust-toolchain.toml
+<ul>
+<li>defines which Rust toolchain to use</li>
+<li>depending on your target this will use <code>nightly</code> or <code>esp</code></li>
+</ul>
+</li>
+<li>.cargo/config.toml
+<ul>
+<li>the Cargo <a href="https://doc.rust-lang.org/cargo/reference/config.html">configuration</a></li>
+<li>this defines a few options to correctly build the project</li>
+<li>also contains <code>runner = &quot;espflash --monitor&quot;</code> - this means you can just use <code>cargo run</code> to flash and monitor your code</li>
+</ul>
+</li>
+<li>.vscode/settings.json
+<ul>
+<li>settings for Visual Studio Code - if you are not using VSCode you can delete the whole folder</li>
+</ul>
+</li>
+<li>src/main.rs
+<ul>
+<li>the main source file of the newly created project</li>
+<li>we will examine it's content in the next section</li>
+</ul>
+</li>
+</ul>
+<h2 id="mainrs"><a class="header" href="#mainrs"><code>main.rs</code></a></h2>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use esp32c3_hal::{clock::ClockControl, pac::Peripherals, prelude::*, timer::TimerGroup, Rtc};
+use esp_backtrace as _;
+
+#[riscv_rt::entry]
+fn main() -&gt; ! {
+    let peripherals = Peripherals::take().unwrap();
+    let system = peripherals.SYSTEM.split();
+    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+
+    // Disable the RTC and TIMG watchdog timers
+    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
+    let timer_group0 = TimerGroup::new(peripherals.TIMG0, &amp;clocks);
+    let mut wdt0 = timer_group0.wdt;
+    let timer_group1 = TimerGroup::new(peripherals.TIMG1, &amp;clocks);
+    let mut wdt1 = timer_group1.wdt;
+
+    rtc.swd.disable();
+    rtc.rwdt.disable();
+    wdt0.disable();
+    wdt1.disable();
+
+    loop {}
+}
+</code></pre>
+<p>That is quite a lot of code. Lets see what it is good for.</p>
+<ul>
+<li><code>#![no_std]</code>
+<ul>
+<li>this tells the Rust compiler that this code doesn't use <code>libstd</code></li>
+</ul>
+</li>
+<li><code>#![no_main]</code>
+<ul>
+<li>The <code>no_main</code> attribute says that this program won't use the standard main interface, which is tailored for command line applications that receive arguments. Instead of the standard main we'll use the entry attribute from the <code>riscv-rt</code> crate to define a custom entry point. In this program we have named the entry point &quot;main&quot;, but any other name could have been used. The entry point function must have the signature <code>fn() -&gt; !</code>; this type indicates that the function never returns – which means that the program never terminates.</li>
+</ul>
+</li>
+<li><code>use esp32c3_hal:{...}</code>
+<ul>
+<li>we need to bring in some types we are going to use</li>
+<li>these are from <code>esp-hal</code></li>
+</ul>
+</li>
+<li><code>use esp_backtrace as _;</code>
+<ul>
+<li>since we are in a bare-metal environment we need a panic-handler that runs if a panic occurs in code</li>
+<li>there are a few different crates you can use (e.g <code>panic-halt</code>) but <code>esp-backtrace</code> provides an implementation that prints the address of a backtrace - together with <code>espflash</code>/<code>espmonitor</code> these addresses can get decoded into source code locations</li>
+</ul>
+</li>
+<li><code>let peripherals = Peripherals::take().unwrap();</code>
+<ul>
+<li>HAL drivers usually take ownership of peripherals accessed via the PAC</li>
+<li>here we take all the peripherals from the PAC to pass them to the HAL drivers later</li>
+</ul>
+</li>
+<li><code>let system = peripherals.SYSTEM.split();</code>
+<ul>
+<li>sometimes a peripheral (here the System peripheral) are coarse grained and don't exactly fit the HAL drivers - so here we split the System peripheral into smaller pieces which get passed to the drivers</li>
+</ul>
+</li>
+<li><code>let clocks = ClockControl::boot_defaults(system.clock_control).freeze();</code>
+<ul>
+<li>here we configure the system clocks - in this case we are fine with the defaults</li>
+<li>we freeze the clocks which means we cannot change them later</li>
+<li>some drivers need a reference to the clocks to know how to calculate rates and durations</li>
+</ul>
+</li>
+<li>the next block of code instanciates some peripherals (namely Rtc and the two timer groups) to disable the watchdog which is armed after boot
+<ul>
+<li>without that code the SoC would reboot after some time</li>
+<li>there is another way to prevent the reboot: <a href="https://docs.rs/esp32c3-hal/0.2.0/esp32c3_hal/prelude/trait._embedded_hal_watchdog_Watchdog.html#tymethod.feed">feeding</a> the watchdog</li>
+</ul>
+</li>
+<li><code>loop {}</code>
+<ul>
+<li>since our function is supposed to never return we just &quot;do nothing&quot; in a loop</li>
+</ul>
+</li>
+</ul>
+<h2 id="running-the-code"><a class="header" href="#running-the-code">Running the Code</a></h2>
+<p>Building and running the code is as easy as</p>
+<pre><code class="language-shell">cargo run
+</code></pre>
+<p>This builds the code according to the configuration and executes <code>espflash</code> to flash the code to the board.</p>
+<p>Since our <code>runner</code> configuration also passes the <code>--monitor</code> argument to <code>espflash</code> we can see what the code is printing.</p>
+<p>You should see something similar to this:</p>
+<pre><code class="language-text">Connecting...
+
+Chip type:         ESP32-C3 (revision 3)
+Crystal frequency: 40MHz
+Flash size:        4MB
+Features:          WiFi
+MAC address:       60:55:f9:c0:0e:ec
+App/part. size:    198752/4128768 bytes, 4.81%
+[00:00:00] ########################################      12/12      segment 0x0
+[00:00:00] ########################################       1/1       segment 0x8000
+[00:00:01] ########################################      57/57      segment 0x10000
+Flashing has completed!
+Commands:
+    CTRL+R    Reset chip
+    CTRL+C    Exit
+
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xc (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4004c72e
+0x4004c72e - _stack_start
+    at ??:??
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd6100,len:0x172c
+load:0x403ce000,len:0x928
+0x403ce000 - _erwtext
+    at ??:??
+load:0x403d0000,len:0x2ce0
+0x403d0000 - _erwtext
+    at ??:??
+entry 0x403ce000
+0x403ce000 - _erwtext
+    at ??:??
+I (24) boot: ESP-IDF v4.4-dev-2825-gb63ec47238 2nd stage bootloader
+I (24) boot: compile time 12:10:40
+I (25) boot: chip revision: 3
+I (28) boot_comm: chip revision: 3, min. bootloader chip revision: 0
+I (35) boot.esp32c3: SPI Speed      : 80MHz
+I (39) boot.esp32c3: SPI Mode       : DIO
+I (44) boot.esp32c3: SPI Flash Size : 4MB
+I (49) boot: Enabling RNG early entropy source...
+I (54) boot: Partition Table:
+I (58) boot: ## Label            Usage          Type ST Offset   Length
+I (65) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (73) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (80) boot:  2 factory          factory app      00 00 00010000 003f0000
+I (88) boot: End of partition table
+I (92) boot_comm: chip revision: 3, min. application chip revision: 0
+I (99) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=04a6ch ( 19052) map
+I (110) esp_image: segment 1: paddr=00014a94 vaddr=40380000 size=00910h (  2320) load
+I (116) esp_image: segment 2: paddr=000153ac vaddr=00000000 size=0ac6ch ( 44140)
+I (131) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=2081ch (133148) map
+I (152) boot: Loaded app from partition at offset 0x10000
+
+</code></pre>
+<p>What you see here are messages from the first and second stage bootloader and then ... nothing.</p>
+<p>And that is exactly what the code is doing.</p>
+<p>You can reboot with <code>CTRL+R</code> or exit with <code>CTRL+C</code></p>
+<p>In the next chapter we will add some more interesting output.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
+<p>In the last chapter you flashed and run your first piece of code on the SoC - while that is already really exciting we can do better.</p>
+<p>Traditionally the first thing to run on a microcontroller is <em>blinky</em>.</p>
+<p>However we will start with <em>Hello World</em> here.</p>
+<h2 id="add-a-dependency"><a class="header" href="#add-a-dependency">Add a Dependency</a></h2>
+<p>In <code>Cargo.toml</code> in the <code>[dependencies]</code> section add this line:</p>
+<pre><code class="language-toml">esp-println = { version = &quot;0.3.1&quot;, features = [&quot;esp32c3&quot;] }
+</code></pre>
+<p><code>esp-println</code> is an additional crate that calls ROM functions to print text that is shown by <code>espflash</code> or <code>espmonitor</code> (or any other serial monitor).</p>
+<p>We need to pass the feature <code>esp32c3</code> since that crate targets multiple SoCs and needs to know which one it is supposed to run on.</p>
+<h2 id="print-something"><a class="header" href="#print-something">Print Something</a></h2>
+<p>In <code>main.rs</code> before the <code>loop {}</code> add this line</p>
+<pre><code class="language-rust ignore">esp_println::println!(&quot;Hello World&quot;);
+</code></pre>
+<p>Please note: Both <code>espflash</code> and <code>espmonitor</code> both only show output when a new-line is detected. There is also a <code>print!</code> macro but nothing will be shown until a new-line is received.</p>
+<p>However other serial monitors work differently.</p>
+<h2 id="see-results"><a class="header" href="#see-results">See Results</a></h2>
+<p>Again run</p>
+<pre><code class="language-shell">cargo run
+</code></pre>
+<p>You should see the text <em>Hello World</em> printed!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="panic"><a class="header" href="#panic">Panic!</a></h1>
+<p>When something goes terribly wrong in Rust there might occur a panic.</p>
+<p>Let's see how it looks like for us.</p>
+<p>In <code>main.rs</code> put this line somewhere, e.g. before our <code>println</code></p>
+<pre><code class="language-rust ignore">panic!(&quot;This is a panic&quot;);
+</code></pre>
+<p>Again run the code.</p>
+<p>You should see something like this</p>
+<pre><code class="language-text">
+
+!! A panic occured in 'src\main.rs', at line 25, column 5
+
+PanicInfo {
+    payload: Any { .. },
+    message: Some(
+        This is a panic,
+    ),
+    location: Location {
+        file: &quot;src\\main.rs&quot;,
+        line: 25,
+        col: 5,
+    },
+    can_unwind: true,
+}
+
+Backtrace:
+
+0x420019aa
+0x420019aa - main
+    at C:\tmp\getting-started\src\main.rs:25
+0x4200014c
+0x4200014c - _start_rust
+    at ...\.cargo\registry\src\github.com-1ecc6299db9ec823\riscv-rt-0.9.0\src\lib.rs:389
+</code></pre>
+<p>We see where the panic occured and we even see a backtrace!</p>
+<p>While in this example things are obvious, this will come handy in more complex code.</p>
+<p>Now try running the code compiled with release profile.</p>
+<pre><code class="language-shell">cargo run --release
+</code></pre>
+<p>Now things are less pretty:</p>
+<pre><code class="language-text">
+!! A panic occured in 'src\main.rs', at line 25, column 5
+
+PanicInfo {
+    payload: Any { .. },
+    message: Some(
+        This is a panic,
+    ),
+    location: Location {
+        file: &quot;src\\main.rs&quot;,
+        line: 25,
+        col: 5,
+    },
+    can_unwind: true,
+}
+
+Backtrace:
+
+0x42000140
+0x42000140 - _start_rust
+    at ??:??
+</code></pre>
+<p>We still see where the panic occured but the backtrace is less helpful now.</p>
+<p>That is because the compiler omitted debug information and optimized the code.</p>
+<p>But you might have noticed the difference in the size of the flashed binary.</p>
+<p>It went from 199056 bytes down to 86896 bytes!</p>
+<p>Please note that this is still huge for what we get. There are a lot of options to get the binary smaller which is beyond the scope of this book. (TODO should we add a section about this?)</p>
+<p>Before going further remove the line causing the explicit panic.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blinky"><a class="header" href="#blinky">Blinky</a></h1>
+<p>Let's see how to create the iconic <em>Blinky</em>.</p>
+<p><img src="assets/blinky.gif" alt="alt text" title="Title" /></p>
+<p>Change the code in <code>main.rs</code> to this</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use esp32c3_hal::{
+    clock::ClockControl, pac::Peripherals, prelude::*, timer::TimerGroup, Delay, Rtc, IO,
+};
+use esp_backtrace as _;
+
+#[riscv_rt::entry]
+fn main() -&gt; ! {
+    let peripherals = Peripherals::take().unwrap();
+    let system = peripherals.SYSTEM.split();
+    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+
+    // Disable the RTC and TIMG watchdog timers
+    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
+    let timer_group0 = TimerGroup::new(peripherals.TIMG0, &amp;clocks);
+    let mut wdt0 = timer_group0.wdt;
+    let timer_group1 = TimerGroup::new(peripherals.TIMG1, &amp;clocks);
+    let mut wdt1 = timer_group1.wdt;
+
+    rtc.swd.disable();
+    rtc.rwdt.disable();
+    wdt0.disable();
+    wdt1.disable();
+
+    esp_println::println!(&quot;Hello World&quot;);
+
+    // Set GPIO7 as an output, and set its state high initially.
+    let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
+    let mut led = io.pins.gpio7.into_push_pull_output();
+
+    led.set_high().unwrap();
+
+    // Initialize the Delay peripheral, and use it to toggle the LED state in a
+    // loop.
+    let mut delay = Delay::new(&amp;clocks);
+
+    loop {
+        led.toggle().unwrap();
+        delay.delay_ms(500u32);
+    }
+}
+</code></pre>
+<p>We need two new types in scope: <code>IO</code> and <code>Delay</code></p>
+<p>On ESP32-C3-DevKit-RUST-1 there is a regular LED connected to GPIO 7. If you use another board consult the data-sheet.</p>
+<p>Please note that most dev-boards today use an addressable LED which works different and is beyond the scope of this book. In that case you can also connect a regular LED to some of the free pins (and don't forget to add a resistor).</p>
+<p>Here we see that we can drive the pin high, low or toggle it.</p>
+<p>We also see that the HAL offers a way to delay execution.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="detect-a-button-press"><a class="header" href="#detect-a-button-press">Detect a button press</a></h1>
+<p>The dev-boards have a button (labeled BOOT) on GPIO9. Let's see how to check the state of the button.</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use esp32c3_hal::{
+    clock::ClockControl, pac::Peripherals, prelude::*, timer::TimerGroup, Rtc, IO,
+};
+use esp_backtrace as _;
+
+#[riscv_rt::entry]
+fn main() -&gt; ! {
+    let peripherals = Peripherals::take().unwrap();
+    let system = peripherals.SYSTEM.split();
+    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+
+    // Disable the RTC and TIMG watchdog timers
+    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
+    let timer_group0 = TimerGroup::new(peripherals.TIMG0, &amp;clocks);
+    let mut wdt0 = timer_group0.wdt;
+    let timer_group1 = TimerGroup::new(peripherals.TIMG1, &amp;clocks);
+    let mut wdt1 = timer_group1.wdt;
+
+    rtc.swd.disable();
+    rtc.rwdt.disable();
+    wdt0.disable();
+    wdt1.disable();
+
+    // Set GPIO7 as an output, GPIO9 as input
+    let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
+    let mut led = io.pins.gpio7.into_push_pull_output();
+    let button = io.pins.gpio9.into_pull_up_input();
+
+    loop {
+        if button.is_high().unwrap() {
+            led.set_high().unwrap();
+        } else {
+            led.set_low().unwrap();
+        }
+    }
+}
+</code></pre>
+<p>Now if the button is not pressed the LED is lit. If the button is pressed the LED is off.</p>
+<p>Similarly to turning a GPIO into an output we can turn it into an input. Then we can get the current state of the input pin with <code>is_high</code> and similar functions.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="detect-a-button-press-with-interrupt"><a class="header" href="#detect-a-button-press-with-interrupt">Detect a button press with interrupt</a></h1>
+<p>Add <code>critical-section = &quot;1.1.0&quot;</code> to the dependencies in <code>Cargo.toml</code> and change <code>main.rs</code> to look like this:</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use core::cell::RefCell;
+use critical_section::Mutex;
+use esp32c3_hal::{
+    clock::ClockControl,
+    gpio::Gpio9,
+    gpio_types::{Event, Input, Pin, PullUp},
+    interrupt,
+    pac::{self, Peripherals},
+    prelude::*,
+    timer::TimerGroup,
+    Rtc, IO,
+};
+use esp_backtrace as _;
+
+static BUTTON: Mutex&lt;RefCell&lt;Option&lt;Gpio9&lt;Input&lt;PullUp&gt;&gt;&gt;&gt;&gt; = Mutex::new(RefCell::new(None));
+
+#[riscv_rt::entry]
+fn main() -&gt; ! {
+    let peripherals = Peripherals::take().unwrap();
+    let system = peripherals.SYSTEM.split();
+    let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+
+    // Disable the RTC and TIMG watchdog timers
+    let mut rtc = Rtc::new(peripherals.RTC_CNTL);
+    let timer_group0 = TimerGroup::new(peripherals.TIMG0, &amp;clocks);
+    let mut wdt0 = timer_group0.wdt;
+    let timer_group1 = TimerGroup::new(peripherals.TIMG1, &amp;clocks);
+    let mut wdt1 = timer_group1.wdt;
+
+    rtc.swd.disable();
+    rtc.rwdt.disable();
+    wdt0.disable();
+    wdt1.disable();
+
+    // Set GPIO9 as input
+    let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
+    let mut button = io.pins.gpio9.into_pull_up_input();
+    button.listen(Event::FallingEdge); // raise interrupt on falling edge
+
+    critical_section::with(|cs| BUTTON.borrow_ref_mut(cs).replace(button));
+
+    interrupt::enable(pac::Interrupt::GPIO, interrupt::Priority::Priority3).unwrap();
+
+    loop {}
+}
+
+#[interrupt]
+fn GPIO() {
+    critical_section::with(|cs| {
+        esp_println::println!(&quot;GPIO interrupt&quot;);
+        BUTTON
+            .borrow_ref_mut(cs)
+            .as_mut()
+            .unwrap()
+            .clear_interrupt();
+    });
+}
+</code></pre>
+<p>There are quite a lot new things here.</p>
+<p>First thing is the <code>static BUTTON</code>. We need it since in the interrupt handler we have to clear the pending interrupt on the button and we somehow need to pass the button from main to the interrupt handler.</p>
+<p>Since an interrupt handler can't have arguments we need a static to get the button into the interrupt handler.</p>
+<p>We need the <code>Mutex</code> to make access to the button safe. Please note that this is not the Mutex you might know from <code>libstd</code> but it's the Mutex from <a href="https://crates.io/crates/critical-section">critical-section</a> (and that's why we need to add it as a dependency).</p>
+<p>Then we need to call <code>listen</code> on the output pin to configure the peripheral to raise interrupts. We can raise interrupts for different events - here we want to raise the interrupt on the falling edge.</p>
+<p>In the next line we move our button into the <code>static BUTTON</code> for the interrupt handler to get hold of it.</p>
+<p>Last thing we need to do is actually enable the interrupt.</p>
+<p>First parameter here is the kind of the interrupt we want. There are several <a href="https://docs.rs/esp32c3/0.5.1/esp32c3/enum.Interrupt.html">possible interrupts</a>.</p>
+<p>Second parameter is the priority of the interrupt.</p>
+<p>The interrupt handler is defined via the <code>#[interrupt]</code> macro.
+Here the name of the function must match the interrupt.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="whats-next"><a class="header" href="#whats-next">What's next?</a></h1>
+<p>There are plenty of examples to explore in the <a href="https://github.com/esp-rs/esp-hal">esp-hal repository</a>. Those are generally a good starting point to explore the functionalities.</p>
+<p>There is also a <a href="https://matrix.to/#/#esp-rs:matrix.org">Matrix channel</a> you can join.</p>
+<h2 id="other-resources"><a class="header" href="#other-resources">Other Resources</a></h2>
+<ul>
+<li><a href="https://github.com/esp-rs/awesome-esp-rust">The Awesome ESP Rust List</a></li>
+<li><a href="https://github.com/esp-rs/esp-println">esp-println</a></li>
+<li><a href="https://github.com/esp-rs/esp-backtrace">esp-backtrace</a></li>
+<li><a href="https://github.com/esp-rs/esp-alloc">esp-alloc</a></li>
+<li><a href="https://github.com/esp-rs/esp-storage">esp-storage</a></li>
+<li><a href="https://github.com/esp-rs/esp-wifi">esp-wifi</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
